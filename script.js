@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     percent.textContent = newProgress;
   }, 800);
 
-  // Email subscription message
+  // Email subscription logic
   const button = document.getElementById("notifyBtn");
   const email = document.getElementById("email");
   const msg = document.getElementById("msg");
@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const value = email.value.trim();
     if (!value || !value.includes("@")) {
       msg.textContent = "⚠️ Please enter a valid email address.";
+      msg.style.color = "red";
       return;
     }
 
     msg.textContent = "✅ Thanks! You'll be notified when FYJC Portal is live.";
+    msg.style.color = "#2563eb";
     email.value = "";
   });
 });
