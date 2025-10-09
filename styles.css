@@ -6,24 +6,27 @@
   --radius: 14px;
 }
 
+/* Reset */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* Base layout */
 body {
-  margin: 0;
-  height: 100vh;
   background: linear-gradient(180deg, var(--bg), #e8f0ff);
   font-family: "Poppins", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 800px;
   width: 100%;
+  max-width: 800px;
 }
 
 .brand {
@@ -31,36 +34,39 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 15px;
+  justify-content: center;
 }
 
 .logo {
-  font-size: 40px;
+  font-size: 38px;
 }
 
 .brand h1 {
   font-size: 22px;
-  margin: 0;
   color: #1e3a8a;
 }
 
 .hero {
   background: var(--card);
-  padding: 30px;
+  padding: 28px 22px;
   border-radius: var(--radius);
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
 .hero h2 {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 10px;
+  color: #111827;
 }
 
 .tag {
   color: var(--muted);
+  font-size: 14px;
   margin-bottom: 20px;
 }
 
+/* Progress card */
 .status-card {
   border: 1px solid #e0e7ff;
   border-radius: 10px;
@@ -71,6 +77,7 @@ body {
 .status-text {
   font-weight: 600;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .progress {
@@ -94,6 +101,11 @@ body {
   color: var(--muted);
 }
 
+/* Email form */
+.cta {
+  margin-top: 15px;
+}
+
 .cta label {
   font-size: 14px;
   color: var(--muted);
@@ -104,13 +116,16 @@ body {
   gap: 8px;
   margin-top: 10px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .subscribe input {
   flex: 1;
+  min-width: 180px;
   padding: 10px;
   border: 1px solid #c7d2fe;
   border-radius: 8px;
+  font-size: 14px;
 }
 
 .subscribe button {
@@ -120,6 +135,7 @@ body {
   padding: 10px 14px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
   transition: background 0.3s;
 }
 
@@ -134,9 +150,10 @@ body {
   color: var(--accent);
 }
 
+/* Features section */
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: 1fr;
   gap: 15px;
   margin-top: 25px;
 }
@@ -145,11 +162,11 @@ body {
   background: #f9fbff;
   border: 1px solid #e0e7ff;
   border-radius: 8px;
-  padding: 12px;
+  padding: 14px;
 }
 
 .feature h3 {
-  margin: 0 0 5px 0;
+  margin-bottom: 5px;
   color: #1e40af;
   font-size: 15px;
 }
@@ -159,8 +176,38 @@ body {
   font-size: 13px;
 }
 
-.small {
+/* Watermark signature */
+.signature {
   margin-top: 25px;
-  font-size: 13px;
-  color: var(--muted);
+  font-size: 7px;
+  color: rgba(0, 0, 0, 0.04);
+  user-select: none;
+  text-align: center;
+  transform: scale(0.9);
+  letter-spacing: 1px;
+}
+
+/* 📱 Responsive Design */
+@media (min-width: 480px) {
+  .hero h2 {
+    font-size: 22px;
+  }
+
+  .features {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 40px;
+  }
+
+  .hero h2 {
+    font-size: 24px;
+  }
+
+  .subscribe {
+    flex-wrap: nowrap;
+  }
 }
