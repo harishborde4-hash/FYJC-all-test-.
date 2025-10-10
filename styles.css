@@ -1,138 +1,90 @@
-/* ---------- Global Styles ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
+/* ---------- Global ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
+html, body { height: 100%; }
 body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #00c6ff);
-  overflow: hidden;
+  display: flex; justify-content: center; align-items: center;
+  background: linear-gradient(135deg,#0f172a,#1e3a8a 40%,#06b6d4);
+  padding: 18px;
 }
 
+/* Mobile-app style container (responsive) */
+.app-wrap { width: 100%; max-width: 420px; height: 95vh; }
 .app-container {
-  position: relative;
-  width: 95%;
-  height: 95%;
-  background: #fff;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
+  height: 100%; background: #fff; border-radius: 18px; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(2,6,23,0.45); display: flex; flex-direction: column;
 }
 
-/* ---------- App Header ---------- */
+/* ---------- Header ---------- */
 .app-header {
-  height: 55px;
-  background: linear-gradient(90deg, #007bff, #00c6ff, #5b86e5);
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
-  color: white;
-  font-weight: 600;
-  font-size: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  position: relative;
-  z-index: 10;
+  height: 60px; background: linear-gradient(90deg,#0ea5e9,#2563eb);
+  color: #fff; display:flex; align-items:center; gap:12px;
+  padding: 0 12px; box-shadow: 0 6px 18px rgba(37,99,235,0.12);
 }
-
-.app-title {
-  margin-left: 10px;
-  font-size: 18px;
-}
-
-/* ---------- Menu Button (3 Dots) ---------- */
 .menu-btn {
-  width: 38px;
-  height: 38px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.12); border: none; cursor:pointer;
 }
+.menu-btn:hover { transform: scale(1.04); }
+.dot { width:5px; height:5px; background: white; border-radius:50%; margin:2px 0; display:block; }
 
-.menu-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
-}
+/* Title */
+.title-wrap { flex:1; display:flex; flex-direction:column; justify-content:center; gap:2px; }
+#appTitle { font-size:15px; font-weight:700; letter-spacing:0.2px; }
+#subTitle { font-size:12px; opacity:0.92; margin-top:2px; }
 
-.dot {
-  width: 5px;
-  height: 5px;
-  background: white;
-  border-radius: 50%;
-  margin: 2px 0;
+/* Header actions */
+.header-actions { display:flex; gap:8px; }
+.header-actions button {
+  background: rgba(255,255,255,0.12); color: #fff; border: none; padding:8px 10px; border-radius:8px; cursor:pointer;
 }
+.header-actions button:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
 
 /* ---------- Sidebar ---------- */
 .sidebar {
-  position: absolute;
-  top: 0;
-  left: -230px;
-  width: 230px;
-  height: 100%;
-  background: linear-gradient(180deg, #007bff, #00c6ff, #7f7fd5);
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
-  border-radius: 0 25px 25px 0;
-  padding-top: 70px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: left 0.4s ease;
-  z-index: 5;
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 260px; transform: translateX(-110%); transition: transform .36s cubic-bezier(.2,.9,.2,1);
+  background: linear-gradient(180deg,#0ea5e9,#7c3aed); color:#fff; z-index:30; padding-top:72px;
+  border-radius: 0 12px 12px 0; box-shadow: 8px 0 30px rgba(0,0,0,0.25);
 }
+.sidebar.active { transform: translateX(0); }
+.sidebar-inner { display:flex; flex-direction:column; align-items:center; gap:12px; padding: 12px; }
 
-.sidebar.active {
-  left: 0;
+/* Sidebar buttons */
+.nav-btn {
+  width: 85%; padding: 12px; border: none; border-radius: 12px;
+  background: rgba(255,255,255,0.92); color:#0b4a82; font-weight:700; cursor:pointer;
+  box-shadow: 0 6px 18px rgba(10,10,10,0.06);
 }
+.nav-btn:hover { transform: translateY(-3px); }
 
-.sidebar button {
-  width: 85%;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #007bff;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+/* Footer close */
+.sidebar-footer { margin-top: auto; padding-bottom: 18px; width:100%; display:flex; justify-content:center; }
+.close-btn { background: transparent; border: 1px solid rgba(255,255,255,0.18); color:#fff; padding:8px 12px; border-radius:10px; cursor:pointer; }
 
-.sidebar button:hover {
-  background: #fff;
-  transform: scale(1.05);
-}
-
-/* ---------- Iframe Area ---------- */
-.app-main {
-  flex: 1;
-  background: #f9f9f9;
-}
-
+/* ---------- Main / Iframe ---------- */
+.app-main { flex:1; position: relative; background: #f6f9ff; }
 iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+  width:100%; height:100%; border: none; display:block;
+  transition: opacity .36s ease; opacity: 1;
 }
 
-/* ---------- Fade Animation ---------- */
-.fade {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
+/* fade */
+.fade { opacity: 0.01 !important; }
 
-.visible {
-  opacity: 1;
+/* ---------- Overlay (when user needs fallback) ---------- */
+.iframe-overlay {
+  position:absolute; inset: 0; display:flex; align-items:center; justify-content:center;
+  background: rgba(8,10,20,0.38); z-index: 40;
+}
+.overlay-card {
+  background: #fff; padding: 18px; max-width:320px; border-radius:12px; text-align:center; box-shadow:0 20px 50px rgba(2,6,23,0.25);
+}
+.overlay-actions { display:flex; gap:10px; justify-content:center; margin-top:12px; }
+.overlay-actions button { padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+.overlay-actions button:first-child { background:#2563eb; color:#fff; }
+.overlay-actions button:last-child { background:#e6e6e6; }
+
+/* ---------- Responsive fixes ---------- */
+@media (min-width:900px) {
+  .app-wrap { max-width: 420px; }
 }
