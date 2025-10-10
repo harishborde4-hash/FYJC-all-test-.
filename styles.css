@@ -1,213 +1,138 @@
-:root {
-  --bg: #f5f8ff;
-  --card: #ffffff;
-  --muted: #6b7280;
-  --accent: #2563eb;
-  --radius: 14px;
-}
-
-/* Reset */
+/* ---------- Global Styles ---------- */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-/* Base layout */
-body {
-  background: linear-gradient(180deg, var(--bg), #e8f0ff);
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  min-height: 100vh;
-}
-
-.container {
-  width: 100%;
-  max-width: 800px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  justify-content: center;
-}
-
-.logo {
-  font-size: 38px;
-}
-
-.brand h1 {
-  font-size: 22px;
-  color: #1e3a8a;
-}
-
-.hero {
-  background: var(--card);
-  padding: 28px 22px;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
-  text-align: center;
-}
-
-.hero h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #111827;
-}
-
-.tag {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-/* Progress card */
-.status-card {
-  border: 1px solid #e0e7ff;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 20px;
-}
-
-.status-text {
-  font-weight: 600;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.progress {
-  width: 100%;
-  height: 10px;
-  background: #e5e7eb;
-  border-radius: 5px;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #00c6ff);
   overflow: hidden;
-  margin-bottom: 8px;
 }
 
-.progress-fill {
-  width: 0;
-  height: 100%;
-  background: var(--accent);
-  transition: width 1s ease-in-out;
-}
-
-.progress-note {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* Email form */
-.cta {
-  margin-top: 15px;
-}
-
-.cta label {
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.subscribe {
+.app-container {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  background: #fff;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.subscribe input {
-  flex: 1;
-  min-width: 180px;
-  padding: 10px;
-  border: 1px solid #c7d2fe;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-.subscribe button {
-  background: var(--accent);
-  border: none;
+/* ---------- App Header ---------- */
+.app-header {
+  height: 55px;
+  background: linear-gradient(90deg, #007bff, #00c6ff, #5b86e5);
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
   color: white;
-  padding: 10px 14px;
-  border-radius: 8px;
+  font-weight: 600;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10;
+}
+
+.app-title {
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+/* ---------- Menu Button (3 Dots) ---------- */
+.menu-btn {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
-.subscribe button:hover {
-  background: #1d4ed8;
+.menu-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
 }
 
-.msg {
-  height: 18px;
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--accent);
+.dot {
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  margin: 2px 0;
 }
 
-/* Features section */
-.features {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  margin-top: 25px;
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -230px;
+  width: 230px;
+  height: 100%;
+  background: linear-gradient(180deg, #007bff, #00c6ff, #7f7fd5);
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 0 25px 25px 0;
+  padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: left 0.4s ease;
+  z-index: 5;
 }
 
-.feature {
-  background: #f9fbff;
-  border: 1px solid #e0e7ff;
-  border-radius: 8px;
-  padding: 14px;
+.sidebar.active {
+  left: 0;
 }
 
-.feature h3 {
-  margin-bottom: 5px;
-  color: #1e40af;
+.sidebar button {
+  width: 85%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #007bff;
+  font-weight: 600;
   font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.feature p {
-  color: var(--muted);
-  font-size: 13px;
+.sidebar button:hover {
+  background: #fff;
+  transform: scale(1.05);
 }
 
-/* Watermark signature */
-.signature {
-  margin-top: 25px;
-  font-size: 7px;
-  color: rgba(0, 0, 0, 0.04);
-  user-select: none;
-  text-align: center;
-  transform: scale(0.9);
-  letter-spacing: 1px;
+/* ---------- Iframe Area ---------- */
+.app-main {
+  flex: 1;
+  background: #f9f9f9;
 }
 
-/* 📱 Responsive Design */
-@media (min-width: 480px) {
-  .hero h2 {
-    font-size: 22px;
-  }
-
-  .features {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
-@media (min-width: 768px) {
-  .hero {
-    padding: 40px;
-  }
+/* ---------- Fade Animation ---------- */
+.fade {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
-  .hero h2 {
-    font-size: 24px;
-  }
-
-  .subscribe {
-    flex-wrap: nowrap;
-  }
+.visible {
+  opacity: 1;
 }
