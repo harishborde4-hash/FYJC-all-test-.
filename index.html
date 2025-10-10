@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Overlay for mobile sidebar -->
+    <div class="overlay" id="overlay"></div>
+
     <!-- Three dots button -->
     <div class="menu-btn" id="menuBtn">
         &#8942;
     </div>
 
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
+    <nav class="sidebar" id="sidebar">
         <ul>
             <li data-link="https://home-zeta-seven.vercel.app/">Home</li>
             <li data-link="https://syllabus-phi.vercel.app/">Syllabus</li>
@@ -21,10 +24,12 @@
             <li data-link="https://about-1-nu.vercel.app/">About</li>
             <li data-link="https://imp-note-sigma.vercel.app/">Important Note</li>
         </ul>
-    </div>
+    </nav>
 
-    <!-- Iframe to load pages -->
-    <iframe src="https://home-zeta-seven.vercel.app/" id="contentFrame"></iframe>
+    <!-- Main content -->
+    <main>
+        <iframe src="https://home-zeta-seven.vercel.app/" id="contentFrame"></iframe>
+    </main>
 
     <script src="script.js"></script>
 </body>
