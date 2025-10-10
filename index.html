@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FYJC App Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-frame">
+
+    <div class="menu-btn" id="menuBtn">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+      <h2>FYJC Portal</h2>
+      <button onclick="loadPage('https://home-zeta-seven.vercel.app/')">🏠 Home</button>
+      <button onclick="loadPage('https://syllabus-phi.vercel.app/')">📚 Syllabus</button>
+      <button onclick="loadPage('https://notice-jet-six.vercel.app/')">📢 Notice</button>
+      <button onclick="loadPage('https://about-1-nu.vercel.app/')">ℹ️ About</button>
+      <button onclick="loadPage('https://imp-note-sigma.vercel.app/')">📝 Important Note</button>
+    </div>
+
+    <iframe id="contentFrame" src="https://home-zeta-seven.vercel.app/"></iframe>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
