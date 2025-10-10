@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FYJC Portal - Your Learning Hub</title>
+    <meta name="description" content="Access your home, syllabus, notices, about information, and important notes all in one place. A professional navigation hub for your educational needs.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Menu Toggle Button -->
+    <button id="menuButton" class="menu-button" aria-label="Toggle navigation menu">
+        <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="5" r="1.5"/>
+            <circle cx="12" cy="12" r="1.5"/>
+            <circle cx="12" cy="19" r="1.5"/>
+        </svg>
+    </button>
+
+    <!-- Sidebar Backdrop -->
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+    <!-- Navigation Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+            <!-- Close Button -->
+            <button id="closeButton" class="close-button" aria-label="Close navigation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Header with Logo -->
+            <div class="sidebar-header">
+                <img src="attached_assets/studying_1760095309714.png" alt="Learning Hub Logo" class="logo">
+                <div>
+                    <h2 class="portal-title">FYJC PORTAL</h2>
+                    <p class="portal-subtitle">Your Learning Hub</p>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <button class="nav-item active" data-section="home" data-url="https://home-zeta-seven.vercel.app/">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <span>Home</span>
+                </button>
+
+                <button class="nav-item" data-section="syllabus" data-url="https://syllabus-phi.vercel.app/">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <span>Syllabus</span>
+                </button>
+
+                <button class="nav-item" data-section="notice" data-url="https://notice-jet-six.vercel.app/">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                    </svg>
+                    <span>Notice</span>
+                </button>
+
+                <button class="nav-item" data-section="about" data-url="https://about-1-nu.vercel.app/">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    <span>About</span>
+                </button>
+
+                <button class="nav-item" data-section="important-note" data-url="https://imp-note-sigma.vercel.app/">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    <span>Important Note</span>
+                </button>
+            </nav>
+
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <p>© 2025 Learning Portal</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content - Iframe Container -->
+    <main id="mainContent" class="main-content">
+        <div id="loadingIndicator" class="loading-indicator">
+            <svg class="spinner" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3"/>
+            </svg>
+            <p>Loading Home...</p>
+        </div>
+        <iframe id="contentFrame" src="https://home-zeta-seven.vercel.app/" title="Home" sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"></iframe>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
