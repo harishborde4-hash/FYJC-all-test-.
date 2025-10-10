@@ -1,4 +1,4 @@
-/* Reset and body */
+/* Reset */
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +12,32 @@ body, html {
     overflow: hidden;
 }
 
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 900;
+}
+
+/* Show overlay */
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* Three dots button */
 .menu-btn {
     position: fixed;
     top: 20px;
     left: 20px;
-    font-size: 30px;
+    font-size: 28px;
     cursor: pointer;
     z-index: 1001;
     color: #007BFF;
@@ -32,28 +52,34 @@ body, html {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px;
-    width: 250px;
+    left: -260px;
+    width: 260px;
     height: 100%;
-    background: linear-gradient(to bottom, #007BFF, #00CFFF, #FF00FF, #FF5733);
+    background: linear-gradient(180deg, #007BFF, #00CFFF, #FF00FF, #FF5733);
     padding-top: 60px;
     transition: left 0.4s ease;
     z-index: 1000;
+    overflow-y: auto;
 }
 
+.sidebar.active {
+    left: 0;
+}
+
+/* Sidebar list */
 .sidebar ul {
     list-style: none;
 }
 
 .sidebar ul li {
-    padding: 15px 20px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.3s;
-    border-radius: 8px;
+    padding: 18px 20px;
     margin: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
     text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .sidebar ul li:hover {
@@ -69,13 +95,27 @@ iframe {
     transition: all 0.3s ease;
 }
 
-/* Sidebar active */
-.sidebar.active {
-    left: 0;
+/* Main content */
+main {
+    width: 100%;
+    height: 100%;
 }
 
-/* Blur effect when sidebar is active */
-body.sidebar-active iframe {
-    filter: blur(2px) brightness(0.8);
-    pointer-events: none;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .menu-btn {
+        font-size: 32px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .sidebar ul li {
+        padding: 16px;
+        margin: 8px;
+    }
+
+    iframe {
+        height: 100%;
+    }
 }
+
