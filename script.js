@@ -1,19 +1,27 @@
 const menuBtn = document.getElementById('menuBtn');
 const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
 const iframe = document.getElementById('contentFrame');
 
-menuBtn.addEventListener('click', () => {
+// Open/close sidebar
+function toggleSidebar() {
     sidebar.classList.toggle('active');
-    document.body.classList.toggle('sidebar-active');
-});
+    overlay.classList.toggle('active');
+}
 
-// Handle sidebar link clicks
+// Three dots button click
+menuBtn.addEventListener('click', toggleSidebar);
+
+// Overlay click closes sidebar
+overlay.addEventListener('click', toggleSidebar);
+
+// Sidebar menu item click
 const links = sidebar.querySelectorAll('li');
 links.forEach(link => {
     link.addEventListener('click', () => {
         const url = link.getAttribute('data-link');
         iframe.src = url;
         sidebar.classList.remove('active');
-        document.body.classList.remove('sidebar-active');
+        overlay.classList.remove('active');
     });
 });
