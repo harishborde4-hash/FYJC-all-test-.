@@ -1,36 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FYJC App Portal</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app-container">
-    <!-- Top navigation bar -->
-    <header class="app-header">
-      <div class="menu-btn" id="menuBtn">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
-      <h1 class="app-title">FYJC Portal</h1>
-    </header>
+  <div class="app-wrap">
+    <div class="app-container" role="application" aria-label="FYJC app">
+      <!-- Top bar -->
+      <header class="app-header">
+        <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </button>
 
-    <!-- Sidebar Menu -->
-    <nav class="sidebar" id="sidebar">
-      <button onclick="loadPage('https://home-zeta-seven.vercel.app/', 'Home')">🏠 Home</button>
-      <button onclick="loadPage('https://syllabus-phi.vercel.app/', 'Syllabus')">📚 Syllabus</button>
-      <button onclick="loadPage('https://notice-jet-six.vercel.app/', 'Notice')">📢 Notice</button>
-      <button onclick="loadPage('https://about-1-nu.vercel.app/', 'About')">ℹ️ About</button>
-      <button onclick="loadPage('https://imp-note-sigma.vercel.app/', 'Important Note')">📝 Important Note</button>
-    </nav>
+        <div class="title-wrap">
+          <h1 id="appTitle">FYJC Portal</h1>
+          <p id="subTitle">Home</p>
+        </div>
 
-    <!-- Main content -->
-    <main class="app-main">
-      <iframe id="contentFrame" src="https://home-zeta-seven.vercel.app/"></iframe>
-    </main>
+        <div class="header-actions">
+          <button id="refreshBtn" title="Reload">⟳</button>
+          <button id="openExternal" title="Open externally" aria-label="Open current page in new tab">⤴</button>
+        </div>
+      </header>
+
+      <!-- Sidebar (slides from left) -->
+      <nav id="sidebar" class="sidebar" aria-hidden="true">
+        <div class="sidebar-inner">
+          <button class="nav-btn" data-url="https://home-zeta-seven.vercel.app/" data-title="Home">🏠 Home</button>
+          <button class="nav-btn" data-url="https://syllabus-phi.vercel.app/" data-title="Syllabus">📚 Syllabus</button>
+          <button class="nav-btn" data-url="https://notice-jet-six.vercel.app/" data-title="Notice">📢 Notice</button>
+          <button class="nav-btn" data-url="https://about-1-nu.vercel.app/" data-title="About">ℹ️ About</button>
+          <button class="nav-btn" data-url="https://imp-note-sigma.vercel.app/" data-title="Important Note">📝 Important</button>
+
+          <div class="sidebar-footer">
+            <button id="closeSidebar" class="close-btn">Close ✕</button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main class="app-main">
+        <iframe id="contentFrame" title="App content"
+                src="https://home-zeta-seven.vercel.app/"></iframe>
+
+        <!-- Helpful overlay shown manually when user wants fallback -->
+        <div id="iframeOverlay" class="iframe-overlay" hidden>
+          <div class="overlay-card">
+            <p>Some sites block embedding inside other sites. If content doesn't appear, open the page in a new tab.</p>
+            <div class="overlay-actions">
+              <button id="overlayOpen">Open in new tab</button>
+              <button id="overlayRetry">Try again</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
   </div>
 
   <script src="script.js"></script>
