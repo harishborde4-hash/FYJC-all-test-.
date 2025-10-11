@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FYJC Portal - Educational Hub</title>
+    <meta name="description" content="Access Home, Syllabus, Notices, About, and Important Notes all in one beautiful app">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+        }
+
+        /* Header Styles */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: linear-gradient(to right, #3b82f6, #a855f7);
+            z-index: 30;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .menu-button {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .menu-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .menu-icon {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .app-title {
+            flex: 1;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .spacer {
+            width: 40px;
+        }
+
+        /* Sidebar Overlay */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Sidebar Styles */
+        .app-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 288px;
+            background: linear-gradient(to bottom, #1e293b, rgba(30, 41, 59, 0.95));
+            z-index: 50;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-sidebar.active {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-title-container h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #3b82f6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.25rem;
+        }
+
+        .close-button {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-nav {
+            padding: 1rem;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .nav-item.active {
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .nav-item.home.active { background: linear-gradient(to right, #3b82f6, #06b6d4); }
+        .nav-item.syllabus.active { background: linear-gradient(to right, #a855f7, #ec4899); }
+        .nav-item.notice.active { background: linear-gradient(to right, #f97316, #ef4444); }
+        .nav-item.about.active { background: linear-gradient(to right, #10b981, #059669); }
+        .nav-item.important.active { background: linear-gradient(to right, #6366f1, #3b82f6); }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-footer {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.75rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 64px;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 10;
+        }
+
+        .loading-overlay.hidden {
+            display: none;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .content-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .app-sidebar {
+                width: 85vw;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <button class="menu-button" id="menuButton" aria-label="Open menu">
+            <svg class="menu-icon" viewBox="0 0 24 24">
+                <line x1="4" y1="12" x2="20" y2="12"></line>
+                <line x1="4" y1="6" x2="20" y2="6"></line>
+                <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+        </button>
+        <h1 class="app-title" id="pageTitle">Home</h1>
+        <div class="spacer"></div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="app-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title-container">
+                <h2>FYJC Portal</h2>
+                <p class="sidebar-subtitle">Explore all sections</p>
+            </div>
+            <button class="close-button" id="closeButton" aria-label="Close menu">
+                <svg class="menu-icon" viewBox="0 0 24 24">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item home active" data-page="home" data-url="https://home-zeta-seven.vercel.app/" data-title="Home">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Home</span>
+            </a>
+
+            <a href="#" class="nav-item syllabus" data-page="syllabus" data-url="https://syllabus-phi.vercel.app/" data-title="Syllabus">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                </svg>
+                <span>Syllabus</span>
+            </a>
+
+            <a href="#" class="nav-item notice" data-page="notice" data-url="https://notice-jet-six.vercel.app/" data-title="Notice">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                </svg>
+                <span>Notice</span>
+            </a>
+
+            <a href="#" class="nav-item about" data-page="about" data-url="https://about-1-nu.vercel.app/" data-title="About">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                </svg>
+                <span>About</span>
+            </a>
+
+            <a href="#" class="nav-item important" data-page="important" data-url="https://imp-note-sigma.vercel.app/" data-title="Important Note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                </svg>
+                <span>Important Note</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Swipe or tap menu to navigate</p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="iframe-container">
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <p class="loading-text" id="loadingText">Loading Home...</p>
+                </div>
+            </div>
+            <iframe 
+                id="contentFrame" 
+                class="content-iframe"
+                src="https://home-zeta-seven.vercel.app/"
+                title="Home"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+            ></iframe>
+        </div>
+    </main>
+
+    <script>
+        // Get DOM elements
+        const menuButton = document.getElementById('menuButton');
+        const closeButton = document.getElementById('closeButton');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const pageTitle = document.getElementById('pageTitle');
+        const contentFrame = document.getElementById('contentFrame');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const loadingText = document.getElementById('loadingText');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        // Open sidebar
+        function openSidebar() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close sidebar
+        function closeSidebar() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Show loading
+        function showLoading(title) {
+            loadingOverlay.classList.remove('hidden');
+            loadingText.textContent = `Loading ${title}...`;
+        }
+
+        // Hide loading
+        function hideLoading() {
+            loadingOverlay.classList.add('hidden');
+        }
+
+        // Navigate to page
+        function navigateToPage(url, title, pageClass) {
+            // Update active state
+            navItems.forEach(item => item.classList.remove('active'));
+            document.querySelector(`.nav-item.${pageClass}`).classList.add('active');
+            
+            // Update title
+            pageTitle.textContent = title;
+            
+            // Show loading
+            showLoading(title);
+            
+            // Load iframe
+            contentFrame.src = url;
+            contentFrame.title = title;
+            
+            // Close sidebar
+            closeSidebar();
+        }
+
+        // Event listeners
+        menuButton.addEventListener('click', openSidebar);
+        closeButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Navigation items
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = item.dataset.url;
+                const title = item.dataset.title;
+                const page = item.dataset.page;
+                navigateToPage(url, title, page);
+            });
+        });
+
+        // Hide loading when iframe loads
+        contentFrame.addEventListener('load', hideLoading);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        // Touch gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const difference = touchEndX - touchStartX;
+            
+            // Swipe right to open
+            if (difference > swipeThreshold && touchStartX < 50) {
+                openSidebar();
+            }
+            
+            // Swipe left to close
+            if (difference < -swipeThreshold && sidebar.classList.contains('active')) {
+                closeSidebar();
+            }
+        }
+
+        // Initial load
+        hideLoading();
+    </script>
+</body>
+</html>
